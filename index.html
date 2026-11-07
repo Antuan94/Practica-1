@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Metas principales -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Chosen · Paneles de una historia</title>
+  <meta name="description" content="Boilerplate de web con estructura semántica, diseño tipo paneles de manga y temática de la serie The Chosen.">
+  <meta name="keywords" content="The Chosen, paneles de manga, web, boilerplate, Jesús, discípulos, serie">
+  <meta name="author" content="Equipo de diseño web">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#151218">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="The Chosen · Paneles de una historia">
+  <meta property="og:description" content="Estructura boilerplate de sitio web inspirada en paneles de manga.">
+  <meta property="og:url" content="https://www.ejemplo.com/">
+  <meta property="og:image" content="assets/img/panel-discipulos.svg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Chosen · Paneles de una historia">
+  <meta name="twitter:description" content="Boilerplate web con diseño tipo paneles de manga.">
+  <meta name="twitter:image" content="assets/img/panel-discipulos.svg">
+
+  <!-- Fuentes desde CDN de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Iconos desde CDN de Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Normalización de navegadores (Normalize.css v8) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <!-- Estilos propios del proyecto -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Enlace de acceso directo para lectores de pantalla -->
+  <a class="salto-contenido" href="#main">Saltar al contenido</a>
+
+  <!-- ============ Header / Navegación ============ -->
+  <header class="site-header">
+    <input type="checkbox" id="menu-switch" class="nav-switch" aria-label="Abrir menú de navegación principal">
+    <label class="nav-toggle" for="menu-switch" aria-controls="primary-navigation" aria-expanded="false">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+      <span class="nav-toggle-text">Menú</span>
+    </label>
+    <nav class="nav" id="primary-navigation" aria-label="Principal">
+      <div class="contenedor nav-contenido">
+        <a class="logo" href="#inicio" aria-label="The Chosen — volver al inicio">
+          <span class="logo-manga" aria-hidden="true"></span>
+          <span class="logo-texto">The Chosen<small>Historia en paneles</small></span>
+        </a>
+
+        <ul class="css3menu">
+          <li class="css3menu-item"><a href="#inicio">Inicio</a></li>
+          <li class="css3menu-item"><a href="#episodios">Episodios</a>
+            <ul class="css3menu-submenu">
+              <li class="css3menu-item"><a href="#episodio-bautismo">El bautismo</a></li>
+              <li class="css3menu-item"><a href="#episodio-ultima-cena">La última cena</a></li>
+              <li class="css3menu-item"><a href="#episodio-camino">El camino a Jerusalén</a></li>
+              <li class="css3menu-item"><a href="#episodio-mateo">Mateo el recaudador</a></li>
+            </ul>
+          </li>
+          <li class="css3menu-item"><a href="#personajes">Personajes</a>
+            <ul class="css3menu-submenu">
+              <li class="css3menu-item"><a href="#personaje-jesus">Jesús</a></li>
+              <li class="css3menu-item"><a href="#personaje-discipulos">Los discípulos</a></li>
+            </ul>
+          </li>
+          <li class="css3menu-item"><a href="#sobre">La serie</a></li>
+          <li class="css3menu-item"><a class="css3menu-cta" href="#episodios">Ver episodio</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ Hero (Portada) ============ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+      <div class="contenedor hero-contenido">
+        <div class="hero-texto">
+          <p class="panel-label">Portada · Edición 01</p>
+          <h1 class="hero-titulo" id="hero-titulo">La historia de Jesús y sus discípulos, contada <em>panel a panel</em>.</h1>
+          <p class="hero-subtitulo">Una estructura boilerplate de web con el ritmo, los siluetas y la fuerza visual de un anime, aplicada a la temática de la serie The Chosen.</p>
+          <a class="boton" href="#episodios">Explorar episodios <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <figure class="panel panel-hero">
+          <img src="assets/img/luz de Dios.jpeg" alt="Silueta de los discípulos de Jesús iluminados por una luz dorada">
+          <figcaption>
+            <span class="panel-tag">Panel 01</span>
+            <span class="panel-titulo">La llamada</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ Contenido principal + Aside ============ -->
+    <div class="contenedor contenido-split">
+
+      <section class="seccion-episodios" id="episodios" aria-labelledby="episodios-titulo">
+        <h2 class="seccion-titulo" id="episodios-titulo">Episodios</h2>
+
+        <div class="grid-paneles">
+          <article class="articulo articulo--destacado" id="episodio-bautismo">
+            <div class="articulo-imagen">
+              <img src="assets/img/bautismo.jpeg" alt="Panel del bautismo de Jesús con la silueta iluminada por la voz del cielo">
+              <span class="panel-tag">Episodio 01</span>
+            </div>
+            <div class="articulo-cuerpo">
+              <p class="articulo-meta">Episodio 01 · El bautismo</p>
+              <h3 class="articulo-titulo">El bautismo de Jesús</h3>
+              <p>La voz del cielo rasga la oscuridad del Jordán y Jesús, hijo de María, desciende a las aguas. En la luz que lo precede comienza la historia de una vida que cambiaría el rumbo de los pueblos.</p>
+              <a class="articulo-enlace" href="#episodio-bautismo">Ver el panel <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </article>
+
+          <article class="articulo" id="episodio-ultima-cena">
+            <div class="articulo-imagen">
+              <img src="assets/img/La ultima cena.jpeg" alt="Panel de la última cena con los discípulos reunidos alrededor de la mesa">
+              <span class="panel-tag">Episodio 02</span>
+            </div>
+            <div class="articulo-cuerpo">
+              <p class="articulo-meta">Episodio 02 · La última cena</p>
+              <h3 class="articulo-titulo">La última cena</h3>
+              <p>Entre un patio y las sombras de Jerusalén, Jesús se reúne con sus discípulos. El vino y el pan se convierten en símbolo y, pronto, en señal de lo que estaba por venir.</p>
+              <a class="articulo-enlace" href="#episodio-ultima-cena">Ver el panel <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </article>
+
+          <article class="articulo" id="episodio-camino">
+            <div class="articulo-imagen">
+              <img src="assets/img/colinas Galilea.jpg" alt="Panel del camino a Jerusalén con una figura viajando entre colinas">
+              <span class="panel-tag">Episodio 03</span>
+            </div>
+            <div class="articulo-cuerpo">
+              <p class="articulo-meta">Episodio 03 · El camino</p>
+              <h3 class="articulo-titulo">El camino a Jerusalén</h3>
+              <p>Miles de personas siguen a Jesús por las colinas de Galilea. Cada paso es una pregunta y cada mirada, un encuentro.</p>
+              <a class="articulo-enlace" href="#episodio-camino">Ver el panel <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </article>
+
+          <article class="articulo" id="episodio-mateo">
+            <div class="articulo-imagen">
+              <img src="assets/img/Recaudador.jpeg" alt="Panel con la silueta de Mateo el recaudador escribiendo en la mesa">
+              <span class="panel-tag">Episodio 05</span>
+            </div>
+            <div class="articulo-cuerpo">
+              <p class="articulo-meta">Episodio 05 · Mateo</p>
+              <h3 class="articulo-titulo">Mateo el recaudador</h3>
+              <p>¿Recaudador de impuestos o discípulo? La pregunta que abriría las puertas de un nuevo reino.</p>
+              <a class="articulo-enlace" href="#episodio-mateo">Ver el panel <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <aside class="sidebar" id="aside" aria-labelledby="aside-titulo">
+        <h2 class="seccion-titulo seccion-titulo--aside" id="aside-titulo">Guía del lector</h2>
+
+        <div class="widget">
+          <h3 class="widget-titulo">Panel del día</h3>
+          <img src="assets/img/jesus hacia Jerusalen.jpeg" alt="Panel del camino a Jerusalén con una figura iluminada">
+          <p>El viaje de Jesús hacia Jerusalén comienza con un solo paso. Sigue la ruta del próximo episodio en este panel.</p>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-titulo">Personajes</h3>
+          <ul class="widget-lista">
+            <li><a href="#personaje-jesus">Jesús</a></li>
+            <li><a href="#personaje-discipulos">Los discípulos</a></li>
+            <li><a href="#episodio-bautismo">El bautismo</a></li>
+            <li><a href="#episodio-ultima-cena">La última cena</a></li>
+          </ul>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-titulo">Recibe el próximo panel</h3>
+          <form class="newsletter" action="#" method="post">
+            <label class="sr-only" for="newsletter-email">Correo electrónico</label>
+            <input type="email" id="newsletter-email" name="email" placeholder="tu@correo.com" required>
+            <button class="boton boton--pequeno" type="submit">Suscribirme</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="site-footer">
+    <div class="contenedor footer-contenido">
+      <div class="footer-col footer-brand">
+        <a class="logo logo--footer" href="#inicio" aria-label="The Chosen — volver al inicio">
+          <span class="logo-manga" aria-hidden="true"></span>
+          <span class="logo-texto">The Chosen<small>Historia en paneles</small></span>
+        </a>
+        <p>Una historia contada con la fuerza visual de los paneles de un anime.</p>
+      </div>
+
+      <nav class="footer-col" aria-label="Navegación secundaria">
+        <h2 class="footer-titulo">Navegación</h2>
+        <ul class="footer-lista">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#episodios">Episodios</a></li>
+          <li><a href="#personajes">Personajes</a></li>
+          <li><a href="#sobre">La serie</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer-col footer-redes">
+        <h2 class="footer-titulo">Redes sociales</h2>
+        <ul class="redes-sociales">
+          <li>
+            <a href="#" aria-label="Facebook de The Chosen">
+              <i class="fab fa-facebook-f" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" aria-label="Instagram de The Chosen">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" aria-label="YouTube de The Chosen">
+              <i class="fab fa-youtube" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" aria-label="X (Twitter) de The Chosen">
+              <i class="fab fa-x-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contenedor copyright">
+      <p>© 2026 The Chosen · Prototipo web con fines de boilerplate.</p>
+      <p>Diseño tipo paneles de manga.</p>
+    </div>
+  </footer>
+
+  <!-- Botón fijo en la esquina inferior derecha -->
+  <a class="ir-arriba" href="#inicio" aria-label="Volver al inicio de la página">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </a>
+
+</body>
+</html>

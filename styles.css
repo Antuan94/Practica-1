@@ -1,0 +1,833 @@
+/* ==========================================================================
+   BOILERPLATE WEB — “Paneles de manga”
+   Tema visual: The Chosen
+   Hoja de estilos principal (un único archivo)
+
+   Estructura de diseño aplicada:
+   · Flexbox como pilar de la ubicación (header, split, footer).
+   · CSS Grid para el “frame” de paneles del contenido.
+   · Normalize.css v8 (CDN) + reset mínimo propio.
+   · Unidades absolutas (px) para el diseño general y relativas (rem/em)
+     para los elementos específicos (tipografía, espaciado de componentes).
+   ========================================================================== */
+
+/* ---------- 1. Reset manual mínimo (complemento de Normalize.css vía CDN) ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--texto-md);
+  line-height: 1.65;
+  color: var(--color-ink);
+  background-color: var(--color-papel);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4,
+p, ul, ol, figure, blockquote, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- 2. Variables globales ---------- */
+:root {
+  /* — Paleta “manga ink & paper” con acento bermellón */
+  --color-ink: #151218;
+  --color-papel: #f8f3e9;
+  --color-rojo: #c8102e;
+  --color-rojo-oscuro: #9b0c24;
+  --color-gris: #5c5a63;
+
+  /* — Tipografía (Google Fonts) */
+  --fuente-titulo: 'Cinzel', 'Times New Roman', serif;
+  --fuente-cuerpo: 'Roboto', Arial, sans-serif;
+  --fuente-panel: 'Courier New', ui-monospace, monospace;
+
+  /* — Escala tipográfica (relativa: 1rem = 16px) */
+  --texto-xs: 0.8rem;
+  --texto-sm: 0.9rem;
+  --texto-md: 1rem;
+  --texto-lg: 1.25rem;
+  --texto-xl: 1.75rem;
+  --texto-2xl: 2.5rem;
+  --texto-3xl: 3.5rem;
+
+  /* — Espaciado (relativo para componentes) */
+  --espacio-xs: 0.5rem;
+  --espacio-sm: 1rem;
+  --espacio-md: 2rem;
+  --espacio-lg: 4rem;
+  --espacio-xl: 6rem;
+
+  /* — Contenedor: ancho variable entre 1000px y 2000px */
+  --ancho-contenedor-max: 2000px;
+
+  /* — Columna de contenido + aside */
+  --ancho-aside: 340px;
+}
+
+/* ---------- 3. Utilidades ---------- */
+.contenedor {
+  width: min(100%, var(--ancho-contenedor-max));
+  margin-inline: auto;
+}
+
+/* ---------- 4. Accesibilidad ---------- */
+.salto-contenido {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  z-index: 1000;
+  background: var(--color-rojo);
+  color: #fff;
+  padding: 12px 20px;
+  font-weight: 700;
+}
+
+.salto-contenido:focus {
+  left: 16px;
+  top: 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-rojo);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ---------- 5. Header y menú ---------- */
+.site-header {
+  position: relative;
+  background-color: var(--color-ink);
+  color: var(--color-papel);
+  border-bottom: 4px solid var(--color-rojo);
+}
+
+.nav-contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-block: var(--espacio-sm);
+}
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logo-manga {
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  background: var(--color-rojo);
+  border: 3px solid var(--color-papel);
+  border-radius: 50% 50% 50% 50% / 35% 35% 65% 65%;
+}
+
+.logo-texto {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fuente-titulo);
+  font-weight: 700;
+  font-size: 1.45rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-papel);
+}
+
+.logo-texto small {
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-rojo);
+}
+
+/* Menú (estilo generador css3-menu) */
+.nav-toggle {
+  display: none;
+}
+
+.nav-switch {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.nav .contenedor {
+  width: 100%;
+}
+
+.nav-contenido .css3menu {
+  display: flex;
+  align-items: stretch;
+}
+
+.css3menu,
+.css3menu ol {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.css3menu li {
+  position: relative;
+}
+
+.css3menu > .css3menu-item > a {
+  display: block;
+  padding: 16px 20px;
+  color: var(--color-papel);
+  font-size: var(--texto-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.css3menu > .css3menu-item:hover > a,
+.css3menu > .css3menu-item:focus-within > a {
+  background-color: var(--color-rojo);
+  color: var(--color-papel);
+  border-bottom-color: var(--color-papel);
+}
+
+.css3menu-submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 600;
+  min-width: 240px;
+  margin: 0;
+  padding: 0;
+  background: var(--color-papel);
+  border: 3px solid var(--color-ink);
+  border-top: none;
+  box-shadow: 8px 8px 0 rgba(21, 18, 24, 0.9);
+}
+
+.css3menu li:hover > .css3menu-submenu,
+.css3menu li:focus-within > .css3menu-submenu {
+  display: block;
+}
+
+.css3menu-submenu .css3menu-item > a {
+  padding: 10px 16px;
+  color: var(--color-ink);
+  font-size: var(--texto-sm);
+  text-transform: none;
+  letter-spacing: 0.04em;
+  border-left: 4px solid transparent;
+}
+
+.css3menu-submenu .css3menu-item:hover > a,
+.css3menu-submenu .css3menu-item:focus-within > a {
+  background: rgba(200, 16, 46, 0.1);
+  border-left-color: var(--color-rojo);
+  padding-left: 20px;
+}
+
+.css3menu-cta {
+  align-self: center;
+  margin-left: 0.5rem;
+  padding: 10px 18px !important;
+  background: var(--color-rojo);
+  color: var(--color-papel) !important;
+  border-bottom: 3px solid var(--color-papel) !important;
+}
+
+/* ---------- 6. Hero ---------- */
+.hero {
+  position: relative;
+  padding: var(--espacio-xl) 0;
+  background-color: var(--color-ink);
+  background-image: radial-gradient(rgba(248, 243, 233, 0.16) 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+  color: var(--color-papel);
+  border-bottom: 6px solid var(--color-rojo);
+  overflow: hidden;
+}
+
+.hero-contenido {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--espacio-lg);
+  align-items: center;
+}
+
+.panel-label {
+  display: inline-block;
+  margin-bottom: var(--espacio-sm);
+  padding: 6px 10px;
+  border: 2px solid var(--color-rojo);
+  color: var(--color-rojo);
+  font-family: var(--fuente-panel);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.hero-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: var(--texto-3xl);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--color-papel);
+}
+
+.hero-titulo em {
+  font-style: normal;
+  color: var(--color-rojo);
+}
+
+.hero-subtitulo {
+  margin-block: var(--espacio-md) var(--espacio-lg);
+  max-width: 46ch;
+  color: rgba(248, 243, 233, 0.85);
+  font-size: var(--texto-lg);
+}
+
+/* Panel con borde de manga */
+.panel {
+  background: var(--color-papel);
+  color: var(--color-ink);
+  border: 4px solid var(--color-ink);
+  box-shadow: 12px 12px 0 rgba(200, 16, 46, 0.85);
+  padding: var(--espacio-sm);
+}
+
+.panel-hero {
+  margin: 0;
+}
+
+.panel-hero img {
+  width: 100%;
+  height: auto;
+}
+
+.panel figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: var(--espacio-sm);
+  padding-top: var(--espacio-xs);
+  border-top: 3px solid var(--color-ink);
+  font-family: var(--fuente-panel);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.panel-tag {
+  padding: 4px 8px;
+  background: var(--color-rojo);
+  color: var(--color-papel);
+  letter-spacing: 0.2em;
+}
+
+.panel-titulo {
+  font-weight: 700;
+}
+
+/* ---------- 7. Botón ---------- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 14px 26px;
+  background: var(--color-rojo);
+  color: var(--color-papel);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  border: 3px solid rgba(248, 243, 233, 0.45);
+}
+
+.boton:hover {
+  background: var(--color-rojo-oscuro);
+}
+
+.boton--pequeno {
+  align-self: flex-start;
+  padding: 10px 18px;
+}
+
+/* ---------- 8. Secciones y layout con flexbox ---------- */
+.contenido-split {
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
+  margin-block: var(--espacio-xl);
+}
+
+.seccion-episodios {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.seccion-titulo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: var(--espacio-lg);
+  font-family: var(--fuente-titulo);
+  font-size: var(--texto-2xl);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.seccion-titulo::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 48px;
+  height: 6px;
+  background: var(--color-rojo);
+}
+
+.seccion-titulo--aside {
+  margin-bottom: var(--espacio-md);
+}
+
+.sidebar {
+  flex: 0 0 var(--ancho-aside);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-lg);
+}
+
+/* ---------- 9. Grid de paneles (CSS Grid) ---------- */
+.grid-paneles {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2rem;
+}
+
+.articulo {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-papel);
+  border: 3px solid var(--color-ink);
+}
+
+.articulo--destacado {
+  grid-column: span 4;
+}
+
+.articulo-imagen {
+  position: relative;
+  background: var(--color-ink);
+  border-bottom: 3px solid var(--color-ink);
+}
+
+.articulo-imagen img {
+  width: 100%;
+  height: auto;
+}
+
+.articulo--destacado .articulo-imagen img {
+  max-height: 360px;
+  object-fit: cover;
+}
+
+.panel-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.articulo-cuerpo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+  flex: 1;
+  padding: var(--espacio-md);
+}
+
+.articulo-meta {
+  font-family: var(--fuente-panel);
+  font-size: var(--texto-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-rojo);
+}
+
+.articulo-titulo {
+  font-family: var(--fuente-titulo);
+  font-size: var(--texto-xl);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.articulo-cuerpo > p {
+  color: var(--color-gris);
+}
+
+.articulo-enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  color: var(--color-rojo);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.articulo:hover {
+  border-color: var(--color-rojo);
+  box-shadow: 10px 10px 0 rgba(200, 16, 46, 0.85);
+  transform: translate(-2px, -2px);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* ---------- 10. Sidebar / widgets ---------- */
+.widget {
+  background: var(--color-papel);
+  border: 3px solid var(--color-ink);
+  padding: var(--espacio-md);
+}
+
+.widget + .widget {
+  margin-top: var(--espacio-md);
+}
+
+.widget-titulo {
+  margin-bottom: var(--espacio-sm);
+  padding-bottom: var(--espacio-xs);
+  border-bottom: 3px solid var(--color-ink);
+  font-family: var(--fuente-titulo);
+  font-size: var(--texto-md);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.widget img {
+  width: 100%;
+  border: 2px solid var(--color-ink);
+}
+
+.widget-lista li + li {
+  border-top: 1px dashed var(--color-ink);
+}
+
+.widget-lista a {
+  display: block;
+  padding: 8px 0;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.widget-lista a:hover {
+  color: var(--color-rojo);
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+}
+
+.newsletter input {
+  padding: 12px;
+  border: 2px solid var(--color-ink);
+  background: #fff;
+  font: inherit;
+  color: var(--color-ink);
+}
+
+/* ---------- 11. Footer ---------- */
+.site-footer {
+  margin-top: var(--espacio-xl);
+  background: var(--color-ink);
+  color: var(--color-papel);
+}
+
+.footer-contenido {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  padding-block: var(--espacio-lg) var(--espacio-md);
+}
+
+.footer-col {
+  flex: 1 1 220px;
+}
+
+.footer-titulo {
+  margin-bottom: var(--espacio-sm);
+  font-family: var(--fuente-titulo);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-papel);
+}
+
+.footer-col a {
+  color: rgba(248, 243, 233, 0.85);
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  color: var(--color-rojo);
+}
+
+.footer-lista li + li {
+  margin-top: 0.35rem;
+}
+
+.footer-lista a {
+  display: inline-block;
+  padding: 4px 0;
+}
+
+.redes-sociales {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+}
+
+.redes-sociales a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--color-papel);
+  color: var(--color-papel);
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.redes-sociales a:hover {
+  background: var(--color-rojo);
+  border-color: var(--color-rojo);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.copyright {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-block: var(--espacio-sm);
+  border-top: 1px solid rgba(248, 243, 233, 0.2);
+  font-size: var(--texto-xs);
+}
+
+/* ---------- 12. Botón fijo: esquina inferior derecha ---------- */
+.ir-arriba {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--color-rojo);
+  border: 2px solid var(--color-papel);
+  color: var(--color-papel);
+  font-size: 1.1rem;
+  text-decoration: none;
+  box-shadow: 6px 6px 0 rgba(21, 18, 24, 0.9);
+}
+
+.ir-arriba:hover {
+  background: var(--color-rojo-oscuro);
+}
+
+/* ---------- 13. Responsive ---------- */
+@media (max-width: 1024px) {
+  .contenido-split {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .grid-paneles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .articulo,
+  .articulo--destacado {
+    grid-column: span 2;
+  }
+
+  .articulo--destacado .articulo-imagen img {
+    max-height: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero-contenido {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 820px) {
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 10px 16px;
+    background: var(--color-rojo);
+    border: 2px solid var(--color-papel);
+    color: var(--color-papel);
+    font: inherit;
+    font-size: var(--texto-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background: var(--color-ink);
+    border-bottom: 4px solid var(--color-rojo);
+  }
+
+  .nav-switch:checked ~ .nav {
+    display: block;
+  }
+
+  .nav-contenido {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-block: var(--espacio-sm);
+  }
+
+  .logo {
+    justify-content: center;
+  }
+
+  .css3menu {
+    flex-direction: column;
+  }
+
+  .css3menu > .css3menu-item > a {
+    padding: 16px;
+    border-bottom: 1px solid rgba(248, 243, 233, 0.15);
+    border-left: none;
+  }
+
+  .css3menu-submenu {
+    position: static;
+    display: block;
+    min-width: 0;
+    margin-left: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-left: 4px solid var(--color-rojo);
+    box-shadow: none;
+  }
+
+  .css3menu-submenu .css3menu-item > a {
+    padding: 8px 8px 8px 20px;
+  }
+}
+
+@media (max-width: 620px) {
+  .grid-paneles {
+    grid-template-columns: 1fr;
+  }
+
+  .articulo,
+  .articulo--destacado {
+    grid-column: span 1;
+  }
+
+  .articulo--destacado .articulo-imagen img {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .ir-arriba {
+    right: 16px;
+    bottom: 16px;
+  }
+}
