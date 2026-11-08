@@ -831,3 +831,42 @@ input:focus-visible {
     bottom: 16px;
   }
 }
+
+
+/* ==========================================================================
+   Menú de prácticas integrado en la barra superior
+   ========================================================================== */
+.menu-practicas-header {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  background: rgba(21, 18, 24, 0.95);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.5);
+}
+
+.btn-practica-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  height: 30px;
+  background: #1a1a1a;
+  border: 1.5px solid #fff;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.btn-practica-header.activa {
+  background: #d62828;
+}
+
+/* Espacio superior en el body para que el menú fijo no tape el header */
+body {
+  padding-top: 54px;
+}
