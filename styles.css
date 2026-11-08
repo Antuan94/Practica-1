@@ -866,7 +866,4 @@ input:focus-visible {
   background: #d62828;
 }
 
-/* Espacio superior en el body para que el menú fijo no tape el header */
-body {
-  padding-top: 54px;
-}
+
